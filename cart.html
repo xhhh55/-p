@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JF Sports - سلة المشتريات</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f5f5f5; color: #111; }
+    header { background: #131921; color: white; padding: 20px; text-align: center; font-size: 24px; font-weight: bold; }
+    .cart-container { max-width: 900px; margin: 30px auto; background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .cart-item { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #ddd; padding: 10px 0; }
+    .cart-item img { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; margin-left: 15px; }
+    .item-details { flex: 1; text-align: right; }
+    .item-details h3 { margin: 0 0 5px; font-size: 18px; }
+    .item-details p { margin: 0; color: #b12704; font-weight: bold; }
+    .remove-btn { background: #b12704; color: white; padding: 6px 12px; border: none; border-radius: 5px; cursor: pointer; }
+    .remove-btn:hover { background: #a11802; }
+    .total { text-align: center; font-size: 20px; margin-top: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+<header>سلة المشتريات</header>
+
+<div class="cart-container" id="cartItems">
+  <!-- عناصر السلة ستظهر هنا -->
+</div>
+
+<div class="total" id="cartTotal">المجموع: $0</div>
+
+<script>
+function renderCart() {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const cartContainer = document.getElementById('cartItems');
+  const cartTotal = document.getElementById('cartTotal');
+
+  cartContainer.innerHTML = '';
+
+  let total = 0;
+  cart.forEach((item, index) => {
+    total += parseFloat(item.price) * item.quantity;
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'cart-item';
+    itemDiv.innerHTML = `
+      <img src="${item.img}" alt="${item.name}">
+      <div class="item-details">
+        <h3>${item.name}</h3>
+        <p>$${item.price} × ${item.quantity}</p>
+      </div>
+      <button class="remove-btn" onclick="removeItem(${index})">حذف</button>
+    `;
+    cartContainer.appendChild(itemDiv);
+  });
+
+  cartTotal.textContent = `المجموع: $${total.toFixed(2)}`;
+}
+
+function removeItem(index) {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  cart.splice(index, 1);
+  localStorage.setItem('cart', JSON.stringify(cart));
+  renderCart();
+}
+
+renderCart();
+</script>
+
+</body>
+</html>

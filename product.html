@@ -1,0 +1,138 @@
+<!DOCTYPE html><html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تفاصيل المنتج - JF Sports</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f5f5f5;
+      color: #111;
+    }
+    header {
+      background-color: #131921;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .product-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin-top: 40px;
+    }
+    .product-container img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: contain;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    .product-container h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .price {
+      font-size: 20px;
+      color: #b12704;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .description {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: #444;
+    }
+    button, .whatsapp-btn {
+      background-color: #131921;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      margin: 5px;
+      text-decoration: none;
+      display: inline-block;
+    }
+    button:hover, .whatsapp-btn:hover {
+      background-color: #232f3e;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">JF-Sport</div>
+    <nav>
+      <a href="index.html" style="color:white;text-decoration:none;">الرئيسية</a>
+    </nav>
+  </header>  <div class="product-container" id="productDetails">
+    <!-- تفاصيل المنتج يتم تعبئتها عبر JavaScript -->
+  </div>  <script>
+    const params = new URLSearchParams(window.location.search);
+    const productName = params.get("name");
+
+    const products = [
+      {
+        name: "دمبل 10 كغ",
+        price: "$15.99",
+        image: "/images/product1.jpg",
+        description: "دمبل عالي الجودة مناسب لجميع تمارين القوة."
+      },
+      {
+        name: "جهاز تمارين كامل",
+        price: "$799",
+        image: "/images/product4.jpg",
+        description: "جهاز تمارين منزلي متعدد الاستخدامات لتقوية الجسم بالكامل."
+      },
+      {
+        name: "بنش تمرين",
+        price: "$129",
+        image: "/images/product6.jpg",
+        description: "بنش قوي مع زوايا متعددة لتقوية عضلات الصدر."
+      },
+      {
+        name: "عجلة تمرين البطن",
+        price: "$25",
+        image: "/images/product7.jpg",
+        description: "أداة فعالة لتمارين عضلات البطن والظهر."
+      }
+    ];
+
+    const product = products.find(p => p.name === productName);
+
+    if (product) {
+      document.getElementById("productDetails").innerHTML = `
+        <img src="${product.image}" alt="${product.name}" />
+        <h1>${product.name}</h1>
+        <div class="price">${product.price}</div>
+        <div class="description">${product.description}</div>
+        <button onclick="addToCart('${product.name}')">أضف إلى السلة</button>
+        <a class="whatsapp-btn" href="https://wa.me/?text=${encodeURIComponent('أريد شراء ' + product.name)}" target="_blank">
+          <i class="fab fa-whatsapp"></i> مشاركة عبر واتساب
+        </a>
+      `;
+    } else {
+      document.getElementById("productDetails").innerHTML =` <p>المنتج غير موجود.</p>`;
+    }
+
+    function addToCart(name) {
+      alert('تمت إضافة ' + name + ' إلى السلة!');
+      // يمكنك تطويرها لاحقاً لتخزين في localStorage
+    }
+  </script></body>
+</html>

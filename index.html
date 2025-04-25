@@ -1,0 +1,721 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JF Sports - المتجر الرياضي</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f5f5;
+      color: #111;
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-in img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .fade-in h3 {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+    .fade-in .price {
+      font-weight: bold;
+      color: #b12704;
+      margin: 5px 0 10px;
+    }
+    header {
+      background-color: #131921;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 30px;
+    }
+    header nav {
+      display: flex;
+      gap: 20px;
+    }
+    header nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+    }
+    header nav a:hover {
+      text-decoration: underline;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+    }
+    .search-bar {
+      background-color: #232f3e;
+      padding: 15px;
+      text-align: center;
+    }
+    .search-bar input {
+      width: 60%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+    .slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  gap: 20px;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.slide {
+  flex: 0 0 80%;
+  max-height: 580px;
+  position: relative;
+}
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+
+    }
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.4);
+      color: white;
+      font-size: 24px;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      z-index: 10;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+
+    }
+    .prev { left: 10px; }
+    .next { right: 10px; }
+    .slider-btn:hover {
+      background-color: rgba(0, 0, 0, 0.6);
+    
+    }
+    .slider-btn:focus {
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5);
+      transform: scale(1.05);
+
+    }
+    .slider-btn:active {
+      transform: translateY(-50%) scale(0.95);
+
+    }
+    .slide-caption {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      width: 80%;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+
+    }
+    .categories {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px 0;
+      flex-wrap: wrap;
+      margin: 0 auto;
+      max-width: 1200px;
+      padding: 20px;
+      background-color: #f5f5f5;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-top: 20px;
+      margin-bottom: 20px;
+      padding: 20px 0;
+      background-color: #f5f5f5;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-top: 20px;
+      margin-bottom: 20px;
+      padding: 20px 0;
+      background-color: #f5f5f5;
+      border-radius: 10px;
+    }
+    .categories div {
+      text-align: center;
+      background-color: white;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin: 10px;
+      flex: 0 0 200px;
+      max-width: 200px;
+      scroll-snap-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+
+    }
+    .categories img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+
+    } 
+    .categories h3 {
+      font-size: 18px;
+      margin: 10px 0;
+
+    }
+    .categories a {
+      text-decoration: none;
+      color: #131921;
+      font-size: 14px;
+      font-weight: bold;
+      padding: 10px 15px;
+      background-color: #f5f5f5;
+      border-radius: 5px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      display: inline-block;
+      margin-top: 10px;
+      text-align: center;
+      width: 100%;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      cursor: pointer;
+      border: 1px solid #ccc;
+      color: #333;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      display: inline-block;
+      margin-top: 10px;
+      text-align: center;
+      width: 100%;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .categories a:hover {
+      text-decoration: underline;
+      background-color: #e1e1e1;
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      color: #111;
+
+    }
+    .categories a:focus {
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5);
+      transform: scale(1.05);
+
+    }
+    .categories p {
+      font-size: 16px;
+      margin-top: 5px;
+      color: #333;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 16px;
+      color: #333;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 10px;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 24px;
+      margin: 20px 0;
+      color: #333;
+      font-weight: bold;
+      text-decoration: underline;
+      text-decoration-color: #131921;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+      text-decoration-style: solid;
+      text-decoration-skip-ink: auto;
+      text-decoration-skip: objects;
+
+    }
+    .product-slider {
+      display: flex;
+      overflow-x: auto;
+      padding: 20px 0;
+      gap: 20px;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      margin: 0 auto;
+      max-width: 1200px;
+      padding: 20px;
+      background-color: #f5f5f5;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .product-slider::-webkit-scrollbar {
+      height: 8px;
+    } 
+    .product-slider::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 10px;
+    }
+    .product-slider::-webkit-scrollbar-thumb:hover {
+      background: #aaa;
+    }
+    .product-slider::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    .product-slider::-webkit-scrollbar-track:hover {
+      background: #e1e1e1;
+    }
+    .product-slider::-webkit-scrollbar-button {
+      display: none;
+    }
+    .product-slider::-webkit-scrollbar-corner {
+      display: none;
+    } 
+    .product-slider::-webkit-scrollbar:vertical {
+      display: none;
+    }
+    .product-slider::-webkit-scrollbar:horizontal {
+      height: 8px;
+    } 
+
+    .product-slider::-webkit-scrollbar,
+    .product-grid::-webkit-scrollbar {
+      display: none;
+    }
+    .product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* خليها عمودين */
+  gap: 40px;
+  padding: 20px;
+}
+    .product-card {
+      min-width: 200px;
+      flex: 0 0 auto;
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+      scroll-snap-align: start;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin: 10px;
+      flex: 0 0 200px;
+      max-width: 200px;
+      scroll-snap-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .product-card:hover {
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transform: scale(1.05);
+
+    }
+    .product-card h3 {
+      font-size: 18px;
+      margin: 10px 0;
+
+    }
+    .product-card .price {
+      font-size: 16px;
+      color: #b12704;
+      margin: 5px 0 10px;
+    }
+    .product-card button {
+      background-color: #131921;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .product-card button:hover {
+      background-color: #232f3e;
+    }
+    .product-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .product-card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .product-card h3 {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    .product-card .price {
+      font-weight: bold;
+      color: #b12704;
+      margin: 5px 0 10px;
+    }
+    .product-card button {
+      background-color: #131921;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .show-more {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .show-more a {
+      background-color: #131921;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+    .show-more a:hover {
+      background-color: #232f3e;
+    }
+    
+    footer {
+      background-color: #232f3e;
+      color: white;
+      text-align: center;
+      padding: 30px 10px;
+      margin-top: 40px;
+    }
+    footer a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    .product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+@media (max-width: 600px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.slider-container {
+  position: relative;
+  overflow: hidden;
+  margin: 10px auto;
+  max-width: 100%;
+}
+.slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+}
+.slide {
+  flex: 1 0 100%;
+  position: relative;
+}
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  font-size: 24px;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+.prev { left: 10px; }
+.next { right: 10px; }
+.product-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.product-card button {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.product-card:hover button {
+  opacity: 1;
+}
+.product-featured {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  padding: 20px;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">JF-Sports</div>
+    <nav>
+      <a href="#">الرئيسية</a>
+      <a href="#categories">الأقسام</a>
+      <a href="#featured-products">المنتجات</a>
+      <a href="#contact">تواصل معنا</a>
+      <a href="cart.html" class="cart-icon">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count"></span>
+      </a>
+    </nav>
+  </header>
+
+  <div class="search-bar">
+    <input type="text" placeholder="ابحث عن منتج رياضي...">
+  </div>
+
+  <div class="slider-container">
+    <div class="slider" id="slider">
+      <div class="slide"><img src="/photo_2025-04-23_14-24-30.jpg" alt="عرض 1"><div class="slide-caption">خصم 50% على المعدات</div></div>
+      <div class="slide"><img src="/photo_2025-04-23_14-24-26.jpg" alt="عرض 2"><div class="slide-caption">جديدنا في الملابس الرياضية</div></div>
+      <div class="slide"><img src="/photo_2025-04-23_14-24-26.jpg" alt="عرض 3"><div class="slide-caption">أفضل البروتينات بأسعار تنافسية</div></div>
+    </div>
+    <button class="slider-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="slider-btn next" onclick="moveSlide(1)">&#10095;</button>
+  </div>
+  
+
+  <div class="categories" id="categories">
+    <div><img src="/photo_2025-04-17_13-56-59.jpg" alt="معدات"><p>معدات</p></div>
+    
+    <div><img src="/photo_2025-04-18_13-47-47.jpg" alt="بروتين"><p>بروتين</p></div>
+    <div><img src="/photo_2025-04-18_13-47-41.jpg" alt="مشروبات"><p>مشروبات</p></div>
+    <div><img src="/photo_2025-04-11_17-11-08.jpg" alt="ملابس"><p>ملابس</p></div>
+  </div>
+
+  <!-- Featured Products -->
+  <section id="featured-products">
+    <h2 class="section-title">منتجات مميزة</h2>
+    <div class="product-grid">
+      <div class="product-card"><img src="/photo_2025-04-11_17-11-04.jpg"><h3>دمبل 10 كغ</h3><div class="price">$15.99</div><button class="add-to-cart" 
+      data-name="دمبل 10 كغ" 
+      data-price="15.99" 
+      data-img="/photo_2025-04-11_17-11-04.jpg">
+أضف إلى السلة
+</button>
+  </div>
+      <div class="product-card"><img src="/photo_2025-04-11_17-11-08.jpg"><h3>تيشيرت رياضي</h3><div class="price">$19.99</div><<button class="add-to-cart" 
+      data-name="تيشيرت رياضي " 
+      data-price="19.99" 
+      data-img="/photo_2025-04-11_17-11-08.jpg">
+أضف إلى السلة
+</button>
+</div>
+      <div class="product-card"><img src="/photo_2025-04-18_13-47-47.jpg"><h3>بروتين سريع الامتصاص</h3><div class="price">$49.99</div><button class="add-to-cart" 
+      data-name="دمبل 10 كغ" 
+      data-price="49.99" 
+      data-img="/photo_2025-04-18_13-47-47.jpg">
+أضف إلى السلة
+</button>
+</div>
+      <div class="product-card"><img src="/photo_2025-04-11_21-59-39.jpg"><h3>جهاز تمارين كامل</h3><div class="price">$799</div><button class="add-to-cart" 
+      data-name="دمبل 10 كغ" 
+      data-price="799" 
+      data-img="/photo_2025-04-11_21-59-39.jpg">
+أضف إلى السلة
+</button>
+</div>
+    </div>
+    <section id="featured-products" class="fade-in"></section>
+  </section>
+
+  <!-- Training Tools -->
+  <section>
+    <h2 class="section-title">أدوات تدريب</h2>
+    <div class="product-slider">
+      <!-- كرر العناصر حسب الحاجة -->
+      <div class="product-card"><img src="/photo_2025-04-11_17-11-04.jpg"><h3>دمبل 10 كغ</h3><div class="price">$15.99</div><button class="add-to-cart" 
+      data-name="دمبل 10 كغ" 
+      data-price="15.99" 
+      data-img="/photo_2025-04-11_17-11-04.jpg">
+أضف إلى السلة
+</button>
+</div>
+      <div class="product-card"><img src="/photo_2025-04-11_17-11-08.jpg"><h3>تيشيرت رياضي</h3><div class="price">$19.99</div><button class="add-to-cart" 
+      data-name="تيشيرت رياضي " 
+      data-price="19.99" 
+      data-img="/photo_2025-04-11_17-11-08.jpg">
+أضف إلى السلة
+</button>
+</div>
+      <div class="product-card"><img src="/photo_2025-04-18_13-47-47.jpg"><h3>بروتين سريع الامتصاص</h3><div class="price">$49.99</div><button class="add-to-cart" 
+      data-name="دمبل 10 كغ" 
+      data-price="49.99" 
+      data-img="/photo_2025-04-18_13-47-47.jpg">
+أضف إلى السلة
+</button>
+</div>
+      <div class="product-card"><img src="/photo_2025-04-11_21-59-39.jpg"><h3>جهاز تمارين كامل</h3><div class="price">$799</div><button class="add-to-cart" 
+      data-name="جهاز تمارين " 
+      data-price="799" 
+      data-img="/photo_2025-04-11_21-59-39.jpg">
+أضف إلى السلة
+</button>
+</div>
+    </div>
+    <section id="featured-products" class="fade-in"></section>
+    <div class="show-more"><a href="training.html">عرض الكل</a></div>
+  </section>
+
+  <!-- Sportswear -->
+  <section>
+    <h2 class="section-title">ملابس رياضية</h2>
+    <div class="product-slider">
+      <div class="product-card"><img src="/photo_2025-04-11_17-11-08.jpg"><h3>تيشيرت رياضي</h3><div class="price">$19.99</div><button class="add-to-cart" 
+      data-name="تيشيرت رياضي " 
+      data-price="19.99" 
+      data-img="/photo_2025-04-11_17-11-08.jpg">
+أضف إلى السلة
+</button>
+</div>
+      <div class="product-card"><img src="/photo_2025-04-18_13-47-47.jpg"><h3>بروتين</h3><div class="price">$49.99</div><button class="add-to-cart" 
+      data-name="بروتين" 
+      data-price="49.99" 
+      data-img="/photo_2025-04-18_13-47-47.jpg">
+أضف إلى السلة
+</button>
+</div>
+      <div class="product-card"><img src="/photo_2025-04-11_17-11-04.jpg"><h3>دمبل</h3><div class="price">$15.99</div><button class="add-to-cart" 
+      data-name="دمبل 10 كغ" 
+      data-price="15.99" 
+      data-img="/photo_2025-04-11_17-11-04.jpg">
+أضف إلى السلة
+</button>
+</div>
+    </div>
+    <section id="featured-products" class="fade-in"></section>
+    <div class="show-more"><a href="clothes.html">عرض الكل</a></div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <p>جميع الحقوق محفوظة &copy; JF Sport 2025</p>
+    <p>
+      <a href="#">سياسة الخصوصية</a> |
+      <a href="#">الشروط والأحكام</a> |
+      <a href="#">تواصل معنا</a>
+    </p>
+  </footer>
+</body>
+<script>
+    const cartBtns = document.querySelectorAll('.add-to-cart');
+
+cartBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const name = btn.getAttribute('data-name');
+    const price = btn.getAttribute('data-price');
+    const img = btn.getAttribute('data-img');
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Check if product already exists
+    const existing = cart.find(item => item.name === name);
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cart.push({ name, price, img, quantity: 1 });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    alert(`تمت إضافة ${name} إلى السلة`);
+  });
+});
+  let currentSlide = 0;
+  const slider = document.getElementById('slider');
+  const totalSlides = slider.children.length;
+
+  function moveSlide(step) {
+    currentSlide = (currentSlide + step + totalSlides) % totalSlides;
+    slider.style.transform =` translateX(-${currentSlide * 100}%)`;
+  }
+
+  // السلايدر يتحرك تلقائياً كل 5 ثواني
+  setInterval(() => moveSlide(1), 5000);
+  const faders = document.querySelectorAll('.fade-in');
+
+const appearOnScroll = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.1,
+});
+
+faders.forEach(fader => {
+  appearOnScroll.observe(fader);
+});
+</script>
+</html>
